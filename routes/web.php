@@ -11,6 +11,13 @@
 |
 */
 
+Route::get('send',function ()
+{
+  return "F";
+  # code...
+});
+Route::post('send-message','MessageController@sendMessage');
+
 Route::get('/', function () {
     return view('welcome');
 });

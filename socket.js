@@ -11,13 +11,19 @@ redis.on('message', function(channel, message) {
     console.log(message);
     message = JSON.parse(message);
     io.emit(channel + ':' + message.event, message.data);
+
 });
 
 io.on('connection', function(socket){
-    console.log('a user connected');
+    console.log('a user connected ' + socket.id);
     socket.on('disconnect', function(){
         console.log('user disconnected');
     });
+    socket.on('message',function(data){
+      console.log(data);
+      io.sockets.emit('message',data);
+    });
+
 });
 http.listen(3000, function(){
     console.log('listening on *:3000');
